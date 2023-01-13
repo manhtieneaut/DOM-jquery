@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính khoản vay ngân hàng</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td><h3>Nhập thông tin khoản vay:</h3></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>1)Số tiền:</td>
+            <td><input type="text" id="money"></td>
+        </tr>
+        <tr>
+            <td>2)Lãi suất hàng năm(%):</td>
+            <td><input type="text" id="rate"></td>
+        </tr>
+        <tr>
+            <td>Thời gian trả(Năm):</td>
+            <td><input type="text" id="year"></td>
+        </tr>
+        <tr>
+            <td><button type="button" id="btn">Tính</button></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><h3>Thông tin thanh toán:</h3></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>4)Số tiền phải trả hàng tháng:</td>
+            <td><input type="text" id="pay-month"></td>
+        </tr>
+        <tr>
+            <td>5)Tổng số tiền phải trả:</td>
+            <td><input type="text" id="pay-total"></td>
+        </tr>
+        <tr>
+            <td>6)Tổng số lãi phải trả:</td>
+            <td><input type="text" name="" id="pay-rate"></td>
+        </tr>
+        
+    </table>
+    <script>
+//khi nhấn submit
+let btn = document.querySelector('#btn');
+        btn.addEventListener('click', (e) => {
+
+            let money = document.getElementById("money").value;
+            let rate = document.getElementById("rate").value;
+            let year = document.getElementById("year").value;
+            alert("ok");
+            let a = anyMoney();
+            let b = a - money;
+            let c = a / (year*12);
+            //Trả kết quả ra màn hình
+            const result1 = document.getElementById('pay-month');
+            result1.value = c.toFixed(2);
+            const result2 = document.getElementById('pay-total');
+            result2.value = a.toFixed(2);
+            const result3 = document.getElementById('pay-rate');
+            result3.value = b.toFixed(2);
+            
+
+
+
+        });
+        
+        function anyMoney(){
+            let money = document.getElementById("money").value;
+            let rate = document.getElementById("rate").value;
+            let year = document.getElementById("year").value;
+            //Số tổng tiền phải trả 
+             const x = Math.pow(1 + (rate/100)/12,year*12);
+             const t = money*x
+             return t       
+        }
+       
+
+        
+    </script>
+</body>
+</html>
+<!--
+Chuyển đổi lãi suất từ ​​phần trăm sang số thập phân và chuyển đổi từ lãi suất hàng năm sang lãi suất hàng tháng.
+Chuyển đổi thời gian trả theo năm thành số tháng.
+Công thức tính Số tiền phải trả hàng tháng:
+x = Math.pow(1 + interest, payments);
+Số tiền phải trả hàng tháng = (Số tiền vay*x*Lãi suất tháng)/(x-1)
+
+Công thức tính Tổng số tiền phải trả:
+Tổng số tiền phải trả = Số tiền phải trả hàng tháng*Thời gian trả
+
+
+
+Công thức tính Tổng số lãi phải trả:
+Tổng số lãi phải trả = Tổng số tiền phải trả - Số tiền vay
+-->
